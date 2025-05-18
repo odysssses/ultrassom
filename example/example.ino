@@ -8,7 +8,7 @@ void setup() {
 }
 
 void loop() {
-  Serial.print("\n Distância:" + static_cast<String>(US.getDistance()) + " ||")
+  Serial.print("\n Distância:" + static_cast<String>(US.getDistance()) + " ||");
   if (US.checkObstacle()) {
     Serial.print(" Obstáculo identificado!");
   }

@@ -7,11 +7,9 @@ class ultrassom {
     public:
         ultrassom(int trig, int echo); //Construtor (trig = PWM, echo = PWM)
 
-        long microsecsToCentimeters(long microsecs); //Transfere distância (microssegundos -> centímetros)
-
         long getDistance(); //Retorna a distância que o sensor lê
 
-        void setMargin(int distMargin);
+        void setMargin(long distMargin);
 
         bool checkObstacle();
 
@@ -19,7 +17,8 @@ class ultrassom {
         int _trig;
         int _echo;
         int _distMargin;
+        long _microsecsToCentimeters(long microsecs); //Transfere distância (microssegundos -> centímetros)
 
-}
+};
 
 #endif

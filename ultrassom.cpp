@@ -6,30 +6,30 @@ ultrassom::ultrassom(int trig, int echo) {
     _echo = echo;
     _distMargin = 15; // Padrão, pode ser alterado
 
-    pinMode(trig, OUTPUT);
-    pinMode(echo, INPUT);
-}
-
-long ultrassom::microsecsToCentimeters(long microsecs) {
-    return microsecs / 29 / 2; //Dado a duração recebida do echo, retorna o valor em centimetros
+    pinMode(_trig, OUTPUT);
+    pinMode(_echo, INPUT);
 }
 
 long ultrassom::getDistance() {
-    digitalWrite(trig, LOW); //Envia uma onda de ultrassom
+    digitalWrite(_trig, LOW); //Envia uma onda de ultrassom
     delayMicroseconds(2);
-    digitalWrite(trig, HIGH);
+    digitalWrite(_trig, HIGH);
     delayMicroseconds(10);
-    digitalWrite(trig, LOW);
-    long duration = pulseIn(echo, HIGH); //Recebe de volta a onda calculando a duração que demorou para voltar
-    long distance = microsecsToCentimeters(duration); //Transfere a duração para distância
+    digitalWrite(_trig, LOW);
+    long duration = pulseIn(_echo, HIGH); //Recebe de volta a onda calculando a duração que demorou para voltar
+    long distance = _microsecsToCentimeters(duration); //Transfere a duração para distância
     return distance;
 }
 
-void ultrassom::setMargin(int distMargin) {
+void ultrassom::setMargin(long distMargin) {
     _distMargin = distMargin;
 }
 
 bool ultrassom::checkObstacle() {
     long dist = getDistance();
     return (dist <= _distMargin);
+}
+
+long ultrassom::_microsecsToCentimeters(long microsecs) {
+    return microsecs / 29 / 2; //Dado a duração recebida do echo, retorna o valor em centimetros
 }
